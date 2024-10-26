@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<a href="{% url 'add_post' %}" class="btn-add-post">Add Post</a>
+
+<h3>Your Posts</h3>
+<div class="posts-grid">
+    {% for post in posts %}
+    <div class="post-card">
+        <a href="{{ post.url }}" target="_blank">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+            <h3>{{ post.title }}</h3>
+        </a>
+        <p>{{ post.description|truncatewords:20 }}</p>
+    </div>
+    {% empty %}
+    <p>You have no posts yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

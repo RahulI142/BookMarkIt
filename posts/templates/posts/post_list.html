@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Bookmarks</h2>
+<a href="{% url 'post_create' %}">Add New Post</a>
+<ul>
+    {% for post in posts %}
+    <li>
+        <a href="{{ post.url }}" target="_blank">{{ post.title }}</a>
+        <form method="POST" action="{% url 'post_delete' post.pk %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
